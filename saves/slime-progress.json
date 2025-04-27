@@ -1,0 +1,11 @@
+{
+  "name": "Rimuru-Coder",
+  "level": 1,
+  "title": "Beginner Slime",
+  "skills": [
+    "Variables"
+  ],
+  "quests": [
+    "Magic Number Doubler"
+  ]
+}
