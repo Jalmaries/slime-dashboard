@@ -18,37 +18,12 @@
 
 <script src="script.js"></script>
 <script>
-fetch('header.html')
+fetch('./header.html')
   .then(res => res.text())
   .then(data => {
     document.getElementById('main-header').innerHTML = data;
-    setupSaveLoad();
+    setupSaveLoad(); // ✅ keep only this
   });
-
-function refreshQuestBoard() {
-  const questBoard = document.getElementById('questBoard');
-  questBoard.innerHTML = '';
-  slime.availableQuests.forEach((quest, index) => {
-    const questCard = document.createElement('div');
-    questCard.className = 'quest-card';
-    questCard.innerHTML = `
-      <h3>${quest.name}</h3>
-      <p>${quest.description}</p>
-      <button onclick="acceptQuest(${index})">Complete (+${quest.xpReward} XP)</button>
-    `;
-    questBoard.appendChild(questCard);
-  });
-}
-
-function acceptQuest(index) {
-  const quest = slime.availableQuests.splice(index, 1)[0];
-  slime.completedQuests.push(quest);
-  gainXP(quest.xpReward);
-  saveSlime();
-  refreshQuestBoard();
-}
-
-document.addEventListener('DOMContentLoaded', refreshQuestBoard);
 </script>
 
 </body>

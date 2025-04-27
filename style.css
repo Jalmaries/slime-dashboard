@@ -151,3 +151,62 @@ ul {
 li {
   margin-bottom: 10px;
 }
+
+#slimeAvatar.slime {
+  width: 120px;
+  height: 100px; /* ✨ Shorter, more onigiri-like */
+  border-radius: 60% 60% 40% 40% / 70% 70% 30% 30%; /* ✨ Rounded like a squishy blob */
+  margin: 20px auto;
+  transition: all 0.5s ease;
+  position: relative;
+}
+
+/* Cute Face */
+.face {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: left;
+}
+
+.eye {
+  width: 10px;
+  height: 4px;
+  background: black;
+  border-radius: 50%;
+}
+
+.eye.left {
+  transform: rotate(20deg);
+}
+
+.eye.right {
+  transform: rotate(-20deg);
+}
+
+/* Evolution Animation */
+@keyframes evolveGlow {
+  0% { transform: scale(1); box-shadow: 0 0 10px white; }
+  50% { transform: scale(1.2); box-shadow: 0 0 30px gold; }
+  100% { transform: scale(1); box-shadow: 0 0 10px white; }
+}
+
+#slimeAvatar.evolving {
+  animation: evolveGlow 1s ease forwards;
+}
+
+/* Slime Forms */
+#slimeAvatar.baby { background: lightblue; box-shadow: 0 0 10px lightblue; }
+#slimeAvatar.junior { background: mediumpurple; box-shadow: 0 0 12px mediumpurple; }
+#slimeAvatar.archer { background: limegreen; box-shadow: 0 0 12px limegreen; }
+#slimeAvatar.dom { background: gold; box-shadow: 0 0 15px gold; }
+#slimeAvatar.async { background: violet; box-shadow: 0 0 16px violet; }
+#slimeAvatar.canvas { background: aqua; box-shadow: 0 0 16px aqua; }
+#slimeAvatar.typescript { background: deepskyblue; box-shadow: 0 0 18px deepskyblue; }
+#slimeAvatar.react { background: indigo; box-shadow: 0 0 18px indigo; }
+#slimeAvatar.backend { background: silver; box-shadow: 0 0 20px silver; }
+#slimeAvatar.demonlord { background: crimson; box-shadow: 0 0 25px crimson; transform: scale(1.2) rotate(5deg); }

@@ -17,35 +17,26 @@
 
 <script src="script.js"></script>
 <script>
-// Load Header
-fetch('header.html')
+// Load Header first
+fetch('./header.html')
   .then(res => res.text())
   .then(data => {
     document.getElementById('main-header').innerHTML = data;
     setupSaveLoad();
   });
 
-// Load Sections
-fetch('sections/character-info.html')
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById('characterInfo').innerHTML = data;
-    refreshCharacterInfo();
-  });
-
-fetch('sections/skills.html')
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById('skillsSection').innerHTML = data;
-    refreshSkills();
-  });
-
-fetch('sections/titles.html')
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById('titlesSection').innerHTML = data;
-    refreshTitles();
-  });
+// Load Character Sections
+Promise.all([
+  fetch('sections/character-info.html').then(res => res.text()),
+  fetch('sections/skills.html').then(res => res.text()),
+  fetch('sections/titles.html').then(res => res.text())
+]).then(([characterHTML, skillsHTML, titlesHTML]) => {
+  document.getElementById('characterInfo').innerHTML = characterHTML;
+  document.getElementById('skillsSection').innerHTML = skillsHTML;
+  document.getElementById('titlesSection').innerHTML = titlesHTML;
+  
+  initializeSlime();  // ✅ Now call after all sections loaded
+});
 </script>
 </body>
 </html>
