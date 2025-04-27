@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rimuru RPG Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🐲 Rimuru's RPG Dashboard 🐲</h1>
+  </header>
+
+  <section id="character-info">
+    <h2>Character Info</h2>
+    <p>Name: <span id="slimeName">Rimuru-Coder</span></p>
+    <p>Level: <span id="slimeLevel">1</span></p>
+    <p>Title: <span id="slimeTitle">Beginner Slime</span></p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul id="skillsList"></ul>
+    <button id="addSkillButton">➕ Learn New Skill</button> <!-- NEW -->
+  </section>
+  
+  <section id="quests">
+    <h2>Completed Quests</h2>
+    <ul id="questsList"></ul>
+    <button id="addQuestButton">➕ Add Completed Quest</button> <!-- NEW -->
+  </section>
+  
+
+  <section id="save-load">
+    <h2>Save / Load</h2>
+    <button id="saveButton">💾 Save Progress</button>
+    <input type="file" id="loadFile" style="display:none;">
+    <label for="loadFile" class="file-label">📂 Load Progress</label>
+  </section>  
+
+  <section id="skill-crystal">
+    <h2>Skill Crystal</h2>
+    <div id="crystalContainer">
+      <!-- Skill nodes will appear here -->
+    </div>
+  </section>   
+
+  <script src="script.js"></script>
+</body>
+</html>

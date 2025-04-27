@@ -1,0 +1,57 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #e0f7fa;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  header {
+    background-color: #0288d1;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
+  section {
+    background: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #0288d1;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #crystalContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .skill-node {
+    background-color: #b0bec5;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    font-weight: bold;
+  }
+  
+  .skill-node.unlocked {
+    background-color: #4caf50; /* Green for unlocked */
+    box-shadow: 0 0 10px #4caf50;
+  }
+  
+  
