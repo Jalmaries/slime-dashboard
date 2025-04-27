@@ -1,0 +1,17 @@
+<section>
+  <h2>Titles</h2>
+  <ul id="titlesList"></ul>
+</section>
+
+<script>
+function refreshTitles() {
+  const titlesList = document.getElementById('titlesList');
+  titlesList.innerHTML = '';
+  slime.titles.forEach(title => {
+    const li = document.createElement('li');
+    li.textContent = title;
+    titlesList.appendChild(li);
+  });
+}
+document.addEventListener('DOMContentLoaded', refreshTitles);
+</script>

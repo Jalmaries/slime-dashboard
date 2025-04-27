@@ -1,122 +1,124 @@
-// Rimuru's Slime Memory Core
+// 📜 Rimuru Slime Memory Core Shared Across Pages
 
-// Slime object (memory)
-const slime = {
-    name: "Rimuru-Coder",
-    level: 1,
-    title: "Beginner Slime",
-    skills: ["Variables"],
-    quests: [
-      {
-        name: "Magic Number Doubler",
-        link: "quests/magic-doubler/index.html"
-      }
-    ]
-  };
-  
-  // Grab important DOM elements
-  const skillsList = document.getElementById('skillsList');
-  const questsList = document.getElementById('questsList');
-  
-  // Save slime data to JSON
-  document.getElementById('saveButton').addEventListener('click', () => {
-    const slimeData = JSON.stringify(slime, null, 2); 
+const slime = JSON.parse(localStorage.getItem('slimeData')) || {
+  name: "Rimuru-Coder",
+  level: 1,
+  xp: 0,
+  titles: ["Beginner Slime"],
+  skills: ["Variables"],
+  completedQuests: [],
+  availableQuests: [
+    { name: "Magic Number Doubler", description: "Double the input number magically!", xpReward: 20, link: "quests/magic-doubler/index.html" },
+    { name: "Variable Mastery", description: "Master the art of variables!", xpReward: 50, link: "quests/variable-master/index.html" },
+    { name: "Slime Multiplication", description: "Multiply slimes through code!", xpReward: 100, link: "quests/slime-multiply/index.html" }
+  ]
+};
+
+// 📜 Save to LocalStorage
+function saveSlime() {
+  localStorage.setItem('slimeData', JSON.stringify(slime));
+}
+
+// 📜 XP / Level / Skills / Titles Logic
+const skillUnlocks = {
+  2: "Functions",
+  3: "Arrays",
+  4: "Objects",
+  5: "DOM Manipulation",
+  6: "Events",
+  7: "Fetch API",
+  8: "Async/Await",
+  10: "Canvas Animation"
+};
+
+const titleMilestones = {
+  3: "Junior Slime Mage",
+  5: "Senior Slime Warrior",
+  8: "Great Slime Hero",
+  10: "Slime Lord Supreme"
+};
+
+function gainXP(amount) {
+  slime.xp += amount;
+  const newLevel = Math.floor(slime.xp / 100) + 1;
+  if (newLevel > slime.level) {
+    slime.level = newLevel;
+    unlockSkills();
+    unlockTitles();
+  }
+  saveSlime();
+}
+
+function unlockSkills() {
+  const skill = skillUnlocks[slime.level];
+  if (skill && !slime.skills.includes(skill)) {
+    slime.skills.push(skill);
+    alert(`🌟 New Skill Unlocked: ${skill}!`);
+  }
+}
+
+function unlockTitles() {
+  const title = titleMilestones[slime.level];
+  if (title && !slime.titles.includes(title)) {
+    slime.titles.push(title);
+    alert(`🏆 New Title Earned: ${title}!`);
+  }
+}
+
+// 📜 Setup Save/Load dynamically AFTER Header Loads
+function setupSaveLoad() {
+  document.getElementById('saveButton')?.addEventListener('click', () => {
+    const slimeData = JSON.stringify(slime, null, 2);
     const blob = new Blob([slimeData], { type: 'application/json' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = 'slime-progress.json';
     link.click();
   });
-  
-  // Load slime data from JSON
-  document.getElementById('loadFile').addEventListener('change', (event) => {
+
+  document.getElementById('loadFile')?.addEventListener('change', (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
       const loadedData = JSON.parse(e.target.result);
-      Object.assign(slime, loadedData); 
-      refreshDashboard(); 
+      Object.assign(slime, loadedData);
+      saveSlime();
+      location.reload();
     };
     reader.readAsText(file);
   });
-  
-  // Refresh the dashboard from slime data
-  function refreshDashboard() {
+}
+
+// 📜 Refreshers for Sections
+function refreshCharacterInfo() {
+  if (document.getElementById('slimeName')) {
     document.getElementById('slimeName').textContent = slime.name;
     document.getElementById('slimeLevel').textContent = slime.level;
-    document.getElementById('slimeTitle').textContent = slime.title;
-  
-    // Update Skills
-    skillsList.innerHTML = '';
-    slime.skills.forEach(skill => {
-      const li = document.createElement('li');
-      li.textContent = skill;
-      skillsList.appendChild(li);
-    });
-  
-    // Update Quests
-    questsList.innerHTML = '';
-    slime.quests.forEach(quest => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.textContent = quest.name;
-      a.href = quest.link;
-      a.target = '_blank';
-      li.appendChild(a);
-      questsList.appendChild(li);
-    });
-  
-    // Update Skill Crystal
-    refreshSkillCrystal();
+    document.getElementById('slimeTitle').textContent = slime.titles[slime.titles.length - 1];
   }
-  
-  // Refresh Skill Crystal section
-  function refreshSkillCrystal() {
-    const crystalContainer = document.getElementById('crystalContainer');
-    crystalContainer.innerHTML = '';
-  
-    const allSkills = [
-      "Variables", "Functions", "Arrays", 
-      "Objects", "DOM Manipulation", 
-      "Events", "Fetch API", "Async/Await", "Canvas Animation"
-    ];
-  
-    allSkills.forEach(skillName => {
+}
+
+function refreshSkills() {
+  if (document.getElementById('skillBoard')) {
+    const skillBoard = document.getElementById('skillBoard');
+    skillBoard.innerHTML = '';
+    slime.skills.forEach(skill => {
       const skillNode = document.createElement('div');
       skillNode.className = 'skill-node';
-      skillNode.textContent = skillName;
-  
-      if (slime.skills.includes(skillName)) {
-        skillNode.classList.add('unlocked');
-      }
-  
-      crystalContainer.appendChild(skillNode);
+      skillNode.textContent = skill;
+      skillBoard.appendChild(skillNode);
     });
   }
-  
-  // First time page load: initialize dashboard
-  refreshDashboard();
+}
 
-  // Add New Skill
-document.getElementById('addSkillButton').addEventListener('click', () => {
-    const newSkill = prompt("Enter new skill name:");
-    if (newSkill) {
-      slime.skills.push(newSkill);
-      refreshDashboard();
-    }
-  });
-  
-  // Add New Completed Quest
-  document.getElementById('addQuestButton').addEventListener('click', () => {
-    const questName = prompt("Enter completed quest name:");
-    const questLink = prompt("Enter link to quest project (optional):");
-  
-    if (questName) {
-      slime.quests.push({
-        name: questName,
-        link: questLink || "#"
-      });
-      refreshDashboard();
-    }
-  });
-  
+function refreshTitles() {
+  if (document.getElementById('titlesList')) {
+    const titlesList = document.getElementById('titlesList');
+    titlesList.innerHTML = '';
+    slime.titles.forEach(title => {
+      const li = document.createElement('li');
+      li.textContent = title;
+      titlesList.appendChild(li);
+    });
+  }
+}

@@ -1,11 +1,19 @@
 {
   "name": "Rimuru-Coder",
   "level": 1,
-  "title": "Beginner Slime",
+  "titles": [
+    "Beginner Slime",
+    "Portal Architect",
+    "Keeper of Memories",
+    "Evolving Slime Hero"
+  ],
   "skills": [
     "Variables"
   ],
   "quests": [
-    "Magic Number Doubler"
+    {
+      "name": "Magic Number Doubler",
+      "link": "quests/magic-doubler/index.html"
+    }
   ]
 }

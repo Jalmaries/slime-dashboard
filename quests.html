@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slime RPG - Quests</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header id="main-header"></header>
+
+<main>
+  <section>
+    <h2>Quest Board</h2>
+    <div id="questBoard"></div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+<script>
+fetch('header.html')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('main-header').innerHTML = data;
+    setupSaveLoad();
+  });
+
+function refreshQuestBoard() {
+  const questBoard = document.getElementById('questBoard');
+  questBoard.innerHTML = '';
+  slime.availableQuests.forEach((quest, index) => {
+    const questCard = document.createElement('div');
+    questCard.className = 'quest-card';
+    questCard.innerHTML = `
+      <h3>${quest.name}</h3>
+      <p>${quest.description}</p>
+      <button onclick="acceptQuest(${index})">Complete (+${quest.xpReward} XP)</button>
+    `;
+    questBoard.appendChild(questCard);
+  });
+}
+
+function acceptQuest(index) {
+  const quest = slime.availableQuests.splice(index, 1)[0];
+  slime.completedQuests.push(quest);
+  gainXP(quest.xpReward);
+  saveSlime();
+  refreshQuestBoard();
+}
+
+document.addEventListener('DOMContentLoaded', refreshQuestBoard);
+</script>
+
+</body>
+</html>

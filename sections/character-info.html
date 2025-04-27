@@ -1,0 +1,15 @@
+<section>
+    <h2>Character Info</h2>
+    <p>Name: <strong id="slimeName"></strong></p>
+    <p>Level: <strong id="slimeLevel"></strong></p>
+    <p>Current Title: <strong id="slimeTitle"></strong></p>
+  </section>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('slimeName').textContent = slime.name;
+    document.getElementById('slimeLevel').textContent = slime.level;
+    document.getElementById('slimeTitle').textContent = slime.titles[slime.titles.length-1];
+  });
+  </script>
+  

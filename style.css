@@ -1,57 +1,153 @@
-body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    background-color: #e0f7fa;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  header {
-    background-color: #0288d1;
-    color: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-  }
-  
-  section {
-    background: white;
-    margin: 20px auto;
-    padding: 20px;
-    width: 80%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
+/* Base Setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .file-label {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #0288d1;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  #crystalContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .skill-node {
-    background-color: #b0bec5;
-    color: white;
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 10px;
-    transition: all 0.5s ease;
-    font-weight: bold;
-  }
-  
-  .skill-node.unlocked {
-    background-color: #4caf50; /* Green for unlocked */
-    box-shadow: 0 0 10px #4caf50;
-  }
-  
-  
+body {
+  font-family: 'MedievalSharp', cursive;
+  background: #121212; /* Deep dark background */
+  color: #e0e0e0; /* Soft light text */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Navigation */
+header {
+  background: #1f1f1f;
+  padding: 10px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left h1 {
+  font-family: 'Cinzel', serif;
+  color: #f0e6d2;
+  font-size: 24px;
+}
+
+.header-center nav {
+  display: flex;
+  gap: 15px;
+}
+
+.header-center nav a {
+  text-decoration: none;
+  background: #4a90e2;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.header-center nav a:hover {
+  background: #357ab8;
+}
+
+.header-right {
+  display: flex;
+  gap: 10px;
+}
+
+.header-right button, .header-right label {
+  background: #4a90e2;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s;
+}
+
+.header-right button:hover, .header-right label:hover {
+  background: #357ab8;
+}
+
+.file-label {
+  display: inline-block;
+}
+
+/* Main Content */
+main {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Cards */
+section {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(255,255,255,0.05);
+}
+
+/* Skill Crystal */
+.skill-node {
+  display: inline-block;
+  background: #2c2c2c;
+  color: #00e5ff;
+  padding: 10px 15px;
+  margin: 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  font-weight: bold;
+}
+
+/* Buttons */
+button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #357ab8;
+}
+
+/* Quest Cards */
+.quest-card {
+  background: #2a2a2a;
+  border: 1px solid #555;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.quest-card h3 {
+  margin-bottom: 10px;
+  color: #ffcc00;
+}
+
+.quest-card p {
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+/* Lists */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
